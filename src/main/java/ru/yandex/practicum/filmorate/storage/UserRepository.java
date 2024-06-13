@@ -42,7 +42,7 @@ public class UserRepository {
     }
 
     private void setName(User user) {
-        if(user.getName() == null) {
+        if (user.getName() == null) {
             user.setName(user.getLogin());
             log.info("setNameAndId: {} - setName", user);
         }
