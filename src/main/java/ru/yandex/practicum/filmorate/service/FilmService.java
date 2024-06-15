@@ -88,8 +88,7 @@ public class FilmService {
 
     private void checkUserId(Integer userId) {
         log.info("checkUserId: {} - ", userId);
-        User user = userService.getUser(userId);
-        if (user == null) {
+        if (userService.getUser(userId) == null) {
             throw new UserNotFoundException(String.format(
                     "Пользователя с ID %s не найден.", userId));
         }
