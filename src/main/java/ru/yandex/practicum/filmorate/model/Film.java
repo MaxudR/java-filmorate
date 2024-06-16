@@ -1,14 +1,11 @@
 package ru.yandex.practicum.filmorate.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import ru.yandex.practicum.filmorate.validation.constraints.FilmReleaseDateConstraint;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 public class Film {
@@ -21,9 +18,8 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private Integer duration;
-    private Set<Integer> likes = new HashSet<>();
-
-    public Integer getLikesCount() {
-        return getLikes().size();
-    }
+    private Mpa mpa;
+    private Integer rate;
+    private Integer likes;
+    private Set<Genre> genres = new HashSet<>();
 }
