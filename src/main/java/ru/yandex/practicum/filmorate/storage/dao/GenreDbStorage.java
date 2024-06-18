@@ -29,10 +29,13 @@ public class GenreDbStorage implements GenreStorage {
     }
 
     public Genre getGenre(Integer genreId) {
-        checkIdGenre(genreId);
 
         String sql = "SELECT * FROM GENRES " +
                 "WHERE GENRE_ID = ?";
+        SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, genreId);
+        if (!rows.next()) {
+            throw new GenreNotFoundException("Genre с ID: " + genreId + " не найден!");
+        }
 
         return jdbcTemplate.queryForObject(sql, this::mapRowToGenre, genreId);
     }
@@ -70,13 +73,5 @@ public class GenreDbStorage implements GenreStorage {
         return genre;
     }
 
-    private void checkIdGenre(Integer id) {
-        String sql = "SELECT * FROM GENRES " +
-                "WHERE GENRE_ID = ?";
-        SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, id);
 
-        if (!rows.next()) {
-            throw new GenreNotFoundException("Genre с ID: " + id + " не найден!");
-        }
-    }
 }
